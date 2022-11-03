@@ -5,11 +5,11 @@ import { Overlay, ModalWindow } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const Modal = props => {
+export const Modal = ({ onClose, children }) => {
   useEffect(() => {
     const handleKeyDown = e => {
       if (e.code === 'Escape') {
-        props.onClose();
+        onClose();
       }
     };
 
@@ -17,18 +17,19 @@ export const Modal = props => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [props]);
+  }, [onClose]);
 
   const handleOverlayClick = event => {
-    console.log(event.currentTarget !== event.target);
-    if (event.currentTarget !== event.target) {
-      props.onClose();
+    console.log(event.currentTarget);
+    console.log(event.target);
+    if (event.currentTarget === event.target) {
+      onClose();
     }
   };
 
   return createPortal(
     <Overlay onClick={handleOverlayClick}>
-      <ModalWindow>{props.children}</ModalWindow>
+      <ModalWindow>{children}</ModalWindow>
     </Overlay>,
     modalRoot
   );
