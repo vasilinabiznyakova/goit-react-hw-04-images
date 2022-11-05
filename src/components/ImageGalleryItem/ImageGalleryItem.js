@@ -14,12 +14,12 @@ export const ImageGalleryItem = ({ weburl, tag, largeImageURL }) => {
     <div>
       <GalleryItem onClick={toggleModal}>
         <GalleryImage src={weburl} alt={tag} />
-        {showModal && (
-          <Modal onClose={toggleModal}>
-            <img src={largeImageURL} alt={tag} />
-          </Modal>
-        )}
       </GalleryItem>
+      {showModal && (
+        <Modal onClose={toggleModal}>
+          <img src={largeImageURL} alt={tag} />
+        </Modal>
+      )}
     </div>
   );
 };
